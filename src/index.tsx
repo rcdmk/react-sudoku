@@ -8,10 +8,10 @@ import { GlobalStyles, theme } from './styles'
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <GlobalStyles />
-    <Content>
+    <Content data-cy="content">
       <Title>Sudoku</Title>
-      <Card>
-        <Grid />
+      <Card data-cy="card">
+        <Grid data-cy="grid" />
       </Card>
     </Content>
   </ThemeProvider>,
