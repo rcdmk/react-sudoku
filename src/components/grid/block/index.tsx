@@ -17,14 +17,10 @@ interface State {
 }
 
 const Block: FC<Props> = ({ colIndex, rowIndex }) => {
-  const state = useSelector<Reducer, State>(
-    ({ workingGrid, selectedBlock }) => ({
-      isActive: selectedBlock
-        ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex
-        : false,
-      value: workingGrid ? workingGrid[rowIndex][colIndex] : 0,
-    })
-  )
+  const state = useSelector<Reducer, State>(({ workingGrid, selectedBlock }) => ({
+    isActive: selectedBlock ? selectedBlock[0] === rowIndex && selectedBlock[1] === colIndex : false,
+    value: workingGrid ? workingGrid[rowIndex][colIndex] : 0,
+  }))
 
   const dispatch = useDispatch<Dispatch<AnyAction>>()
 
@@ -33,11 +29,7 @@ const Block: FC<Props> = ({ colIndex, rowIndex }) => {
   }
 
   return (
-    <Container
-      active={state.isActive}
-      data-cy={`block-${rowIndex}-${colIndex}`}
-      onClick={handleClick}
-    >
+    <Container active={state.isActive} data-cy={`block-${rowIndex}-${colIndex}`} onClick={handleClick}>
       {state.value || ''}
     </Container>
   )
