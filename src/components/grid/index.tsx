@@ -3,27 +3,35 @@ import useMousetrap from 'react-hook-mousetrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { AnyAction } from 'redux'
 
-import { createGrid, Reducer, selectBlock } from 'reducers'
-import { BLOCK_COORDS, INDEX } from 'typings'
+import { createGrid, fillBlock, Reducer, selectBlock } from 'reducers'
+import { BLOCK_COORDS, INDEX, N, NUMBERS } from 'typings'
 
 import Block from './block'
 import { Container, Row } from './styles'
 
 interface State {
   selectedBlock?: BLOCK_COORDS
+  selectedValue: N
 }
 
 const Grid: FC = () => {
-  const state = useSelector<Reducer, State>(({ selectedBlock }) => ({
+  const state = useSelector<Reducer, State>(({ selectedBlock, workingGrid }) => ({
     selectedBlock,
+    selectedValue:
+      workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
   }))
 
   const dispatch = useDispatch<Dispatch<AnyAction>>()
   const create = useCallback(() => dispatch(createGrid()), [dispatch])
 
-  useEffect(() => {
-    create()
-  }, [create])
+  const fill = useCallback(
+    (n: NUMBERS) => {
+      if (state.selectedBlock && state.selectedValue === 0) {
+        dispatch(fillBlock(state.selectedBlock, n))
+      }
+    },
+    [dispatch, state.selectedBlock, state.selectedValue]
+  )
 
   const moveDown = () => {
     if (state.selectedBlock && state.selectedBlock[0] < 8) {
@@ -49,10 +57,24 @@ const Grid: FC = () => {
     }
   }
 
+  useMousetrap('1', () => fill(1))
+  useMousetrap('2', () => fill(2))
+  useMousetrap('3', () => fill(3))
+  useMousetrap('4', () => fill(4))
+  useMousetrap('5', () => fill(5))
+  useMousetrap('6', () => fill(6))
+  useMousetrap('7', () => fill(7))
+  useMousetrap('8', () => fill(8))
+  useMousetrap('9', () => fill(9))
+
   useMousetrap('down', moveDown)
   useMousetrap('left', moveLeft)
   useMousetrap('right', moveRight)
   useMousetrap('up', moveUp)
+
+  useEffect(() => {
+    create()
+  }, [create])
 
   return (
     <Container data-cy="grid-container">
@@ -60,7 +82,9 @@ const Grid: FC = () => {
         [...Array(9)].map((_, rowIndex) => (
           <Row data-cy="grid-row-container">
             {Children.toArray(
-              [...Array(9)].map((_, colIndex) => <Block colIndex={colIndex as INDEX} rowIndex={rowIndex as INDEX} />)
+              [...Array(9)].map((_, colIndex) => (
+                <Block colIndex={colIndex as INDEX} rowIndex={rowIndex as INDEX} />
+              ))
             )}
           </Row>
         ))
