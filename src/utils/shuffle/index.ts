@@ -1,5 +1,5 @@
 /**
- * Returns a shuffled copy of the provided array
+ * Shuffles the provided array elements
  * @param array An array of type T to be shuffled
  */
 function shuffle<T>(array: T[]) {
