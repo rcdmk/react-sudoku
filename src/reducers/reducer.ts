@@ -11,12 +11,15 @@ function reducer(state = initialState, action: AnyAction): Reducer {
   switch (action.type) {
     case types.CREATE_GRID:
       const solvedGrid = createFullGrid()
-      const puzzle = copyGrid(solvedGrid)
-      removeNumbers(puzzle)
+      const puzzleGrid = copyGrid(solvedGrid)
+      removeNumbers(puzzleGrid)
+      const workingGrid = copyGrid(puzzleGrid)
 
       return {
         ...state,
-        grid: puzzle,
+        puzzleGrid,
+        solvedGrid,
+        workingGrid,
       }
     case types.SELECT_BLOCK:
       return {
