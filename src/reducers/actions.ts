@@ -5,7 +5,7 @@ import * as types from './types'
 
 export const createGrid = (): Action => ({ type: types.CREATE_GRID })
 
-export const select = (coords: BLOCK_COORDS): AnyAction => ({
+export const selectBlock = (coords: BLOCK_COORDS): AnyAction => ({
   coords,
   type: types.SELECT_BLOCK,
 })

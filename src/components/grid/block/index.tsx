@@ -2,7 +2,7 @@ import React, { Dispatch, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AnyAction } from 'redux'
 
-import { Reducer, select } from 'reducers'
+import { Reducer, selectBlock } from 'reducers'
 import { INDEX, N } from 'typings'
 import { Container } from './styles'
 
@@ -27,7 +27,7 @@ const Block: FC<Props> = ({ colIndex, rowIndex }) => {
   const dispatch = useDispatch<Dispatch<AnyAction>>()
 
   const handleClick = () => {
-    if (!state.isActive) dispatch(select([rowIndex, colIndex]))
+    if (!state.isActive) dispatch(selectBlock([rowIndex, colIndex]))
   }
 
   return (
