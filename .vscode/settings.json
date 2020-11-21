@@ -8,5 +8,5 @@
   "javascript.format.enable": false,
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "react_redux",
-  "jestrunner.jestCommand": "yarn test -- --watchAll=false"
+  "jestrunner.jestCommand": "yarn test --watchAll=false"
 }

@@ -1,7 +1,12 @@
 import { GRID, INDEX, NUMBERS } from 'typings'
-import { identifySquare, isInCol, isInRow, shuffle } from 'utils'
-import checkGrid from 'utils/check-grid'
-import isInSquare from 'utils/is-in/square'
+import {
+  checkGrid,
+  identifySquare,
+  isInCol,
+  isInRow,
+  isInSquare,
+  shuffle,
+} from 'utils'
 
 const numbers: NUMBERS[] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
