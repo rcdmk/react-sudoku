@@ -1,7 +1,7 @@
 import { GRID } from 'typings'
 
 /**
- * returns true if the grid is a valid sudoku grid
+ * Returns true if the grid has no zeroes
  * @param grid A 9X9 sudoku grid
  */
 function checkGrid(grid: GRID): boolean {
