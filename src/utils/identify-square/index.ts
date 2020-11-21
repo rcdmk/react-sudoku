@@ -1,9 +1,9 @@
-import { GRID, INDEXES, SQUARE } from 'typings'
+import { GRID, INDEX, SQUARE } from 'typings'
 
 interface Input {
-  col: INDEXES
+  col: INDEX
   grid: GRID
-  row: INDEXES
+  row: INDEX
 }
 
 /**
