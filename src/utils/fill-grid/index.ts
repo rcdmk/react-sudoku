@@ -17,24 +17,23 @@ function fillGrid(grid: GRID) {
     row = Math.floor(i / 9) as INDEXES
     col = (i % 9) as INDEXES
 
-    if (grid[row][col] === 0) {
-      shuffle(numbers)
+    if (grid[row][col] !== 0) continue
 
-      for (let value of numbers) {
-        if (!isInRow({ grid, row, value })) {
-          if (!isInCol({ grid, col, value })) {
-            const square = identifySquare({ grid, col, row })
-            if (!isInSquare({ square, value })) {
-              grid[row][col] = value
+    shuffle(numbers)
 
-              if (checkGrid(grid) || fillGrid(grid)) return true
-            }
-          }
-        }
-      }
+    for (let value of numbers) {
+      if (isInRow({ grid, row, value })) continue
+      if (isInCol({ grid, col, value })) continue
 
-      break
+      const square = identifySquare({ grid, col, row })
+      if (isInSquare({ square, value })) continue
+
+      grid[row][col] = value
+
+      if (checkGrid(grid) || fillGrid(grid)) return true
     }
+
+    break
   }
 
   grid[row][col] = 0
