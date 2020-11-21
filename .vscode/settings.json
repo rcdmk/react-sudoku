@@ -8,7 +8,5 @@
   "javascript.format.enable": false,
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "react_redux",
-  "typescriptHero.imports.organizeOnSave": true,
-  "typescriptHero.imports.insertSemicolons": false,
   "jestrunner.jestCommand": "yarn test -- --watchAll=false"
 }
