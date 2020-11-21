@@ -20,7 +20,9 @@ function compareArrays(arr1: any[], arr2: any[]): boolean {
     if (!element1IsArray || !element2IsArray) {
       if (element2IsArray || element2IsArray) return false
 
-      if (element1 === element2) continue
+      if (element1 !== element2) return false
+
+      continue
     }
 
     if (!compareArrays(element1, element2)) return false

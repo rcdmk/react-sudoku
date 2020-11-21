@@ -23,6 +23,8 @@ describe('compareArrays', () => {
   })
 
   it('returns false if arrays are identical not', () => {
+    expect(compareArrays([1, 2, 4], [1, 2, 3])).toBeFalsy()
+
     expect(compareArrays([1, 2, 3, 4], [1, 2, 3])).toBeFalsy()
 
     expect(compareArrays([1, '2', 3, '4', '5'], [1, '2', 3, '4', 5])).toBeFalsy()
