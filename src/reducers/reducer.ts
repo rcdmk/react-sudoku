@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux'
 
-import { compareArrays, copyGrid, createFullGrid, removeNumbers } from 'utils'
+import { checkGrid, compareArrays, copyGrid, createFullGrid, removeNumbers } from 'utils'
 
 import { Reducer } from './interfaces'
 import * as types from './types'
@@ -25,14 +25,13 @@ function reducer(state = initialState, action: AnyAction): Reducer {
     case types.FILL_BLOCK:
       if (!state.workingGrid || !state.solvedGrid) return state
 
-      if (state.solvedGrid[action.coords[0]][action.coords[1]] !== action.value) {
-        alert('Invalid option!')
-        return state
-      }
-
       state.workingGrid[action.coords[0]][action.coords[1]] = action.value
 
-      if (compareArrays(state.workingGrid, state.solvedGrid)) alert('Completed!')
+      if (compareArrays(state.workingGrid, state.solvedGrid)) {
+        alert('Completed!')
+      } else if (checkGrid(state.workingGrid)) {
+        alert('Invalid solution')
+      }
 
       return {
         ...state,

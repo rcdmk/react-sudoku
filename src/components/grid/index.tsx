@@ -10,25 +10,33 @@ import Block from './block'
 import { Container, Row } from './styles'
 
 interface State {
+  puzzleGrid?: GRID
   selectedBlock?: BLOCK_COORDS
   selectedValue: N
   solvedGrid?: GRID
 }
 
 const Grid: FC = () => {
-  const state = useSelector<Reducer, State>(({ selectedBlock, solvedGrid, workingGrid }) => ({
-    selectedBlock,
-    selectedValue:
-      workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
-    solvedGrid,
-  }))
+  const state = useSelector<Reducer, State>(
+    ({ puzzleGrid, selectedBlock, solvedGrid, workingGrid }) => ({
+      puzzleGrid,
+      selectedBlock,
+      selectedValue:
+        workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
+      solvedGrid,
+    })
+  )
 
   const dispatch = useDispatch<Dispatch<AnyAction>>()
   const create = useCallback(() => dispatch(createGrid()), [dispatch])
 
   const fill = useCallback(
     (n: NUMBERS) => {
-      if (state.selectedBlock && state.selectedValue === 0) {
+      if (
+        state.selectedBlock &&
+        state.puzzleGrid &&
+        state.puzzleGrid[state.selectedBlock[0]][state.selectedBlock[1]] === 0
+      ) {
         dispatch(fillBlock(state.selectedBlock, n))
       }
     },

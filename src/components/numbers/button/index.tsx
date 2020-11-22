@@ -16,10 +16,9 @@ interface State {
 }
 
 const NumberButton: FC<Props> = ({ value }) => {
-  const state = useSelector<Reducer, State>(({ selectedBlock, workingGrid }) => ({
+  const state = useSelector<Reducer, State>(({ selectedBlock, puzzleGrid }) => ({
     selectedBlock,
-    selectedValue:
-      workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
+    selectedValue: puzzleGrid && selectedBlock ? puzzleGrid[selectedBlock[0]][selectedBlock[1]] : 0,
   }))
 
   const dispatch = useDispatch<Dispatch<AnyAction>>()
