@@ -17,6 +17,7 @@ function reducer(state = initialState, action: AnyAction): Reducer {
 
       return {
         ...state,
+        selectedBlock: undefined,
         puzzleGrid,
         solvedGrid,
         workingGrid,
