@@ -1,31 +1,37 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { Children, FC } from 'react'
+import { useSelector } from 'react-redux'
 
-import Notification, { Props as NotificationProps } from './notification'
+import { Reducer } from 'reducers'
+
+import Notification from './notification'
 import { Container } from './styles'
-import { Position } from './typings'
+import { Position, ToastNotification } from './typings'
 
 interface Props {
   position?: Position
-  notifications?: NotificationProps[]
 }
 
-const Toast: FC<Props> = ({ position, notifications = [] }) => {
-  const [list, setList] = useState(notifications)
+interface State {
+  notifications: ToastNotification[]
+}
 
-  useEffect(() => {
-    setList(notifications)
-  }, [notifications, list])
+const Toast: FC<Props> = ({ position }) => {
+  const state = useSelector<Reducer, State>(({ notifications = [] }) => ({
+    notifications,
+  }))
 
   return (
-    <Container position={position} className={position} data-cy="toast-container">
-      {list.map((notification) => (
-        <Notification
-          description={notification.description}
-          position={position}
-          title={notification.title}
-          type={notification.type}
-        />
-      ))}
+    <Container className={position} data-cy="toast-container">
+      {Children.toArray(
+        state.notifications.map((notification) => (
+          <Notification
+            description={notification.description}
+            position={position}
+            title={notification.title}
+            type={notification.type}
+          />
+        ))
+      )}
     </Container>
   )
 }
