@@ -29,7 +29,7 @@ const Block: FC<Props> = ({ colIndex, rowIndex }) => {
   const dispatch = useDispatch<Dispatch<AnyAction>>()
 
   const handleClick = () => {
-    if (!state.isActive) dispatch(selectBlock([rowIndex, colIndex]))
+    if (!state.isActive && !state.isPuzzle) dispatch(selectBlock([rowIndex, colIndex]))
   }
 
   return (
