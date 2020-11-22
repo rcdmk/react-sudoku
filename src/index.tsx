@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
 import { GlobalStyles, theme } from 'styles'
-import { Card, Content, Grid, Numbers, Title } from 'components'
+import { Card, Content, Grid, NewButton, Numbers, Title } from 'components'
 import { configureStore } from 'core'
 
 const store = configureStore()
@@ -16,6 +16,7 @@ ReactDOM.render(
       <Content data-cy="content">
         <Title>Sudoku</Title>
         <Card data-cy="card">
+          <NewButton />
           <Grid data-cy="grid" />
           <Numbers />
         </Card>
