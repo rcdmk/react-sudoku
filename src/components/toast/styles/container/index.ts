@@ -1,10 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
-
-import { Position } from '../../typings'
-
-interface Props {
-  position?: Position
-}
+import styled, { keyframes } from 'styled-components'
 
 const toastInLeft = keyframes`
   from {
@@ -26,7 +20,7 @@ const toastInRight = keyframes`
 	}
 `
 
-export const Container = styled.div<Props>`
+export const Container = styled.div`
   font-size: 14px;
   box-sizing: border-box;
   position: fixed;
