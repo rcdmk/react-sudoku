@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components'
 
 interface Props {
   active?: boolean
+  line?: boolean
   puzzle?: boolean
 }
 
 export const Container = styled.div<Props>`
-  ${({ active, puzzle, theme }) => css`
+  ${({ active, line, puzzle, theme }) => css`
     align-items: center;
-    background-color: ${active ? theme.colors.blue : theme.colors.white};
+    background-color: ${active ? theme.colors.blue : line ? theme.colors.lightBlue : theme.colors.white};
     border: solid 1px ${theme.colors.black};
     cursor: pointer;
     display: flex;
