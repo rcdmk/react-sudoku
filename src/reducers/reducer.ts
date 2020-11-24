@@ -5,7 +5,9 @@ import { checkGrid, compareArrays, copyGrid, createFullGrid, removeNumbers } fro
 import { Reducer } from './interfaces'
 import * as types from './types'
 
-const initialState: Reducer = {}
+const initialState: Reducer = {
+  gameOver: false,
+}
 
 function reducer(state = initialState, action: AnyAction): Reducer {
   switch (action.type) {
@@ -17,8 +19,9 @@ function reducer(state = initialState, action: AnyAction): Reducer {
 
       return {
         ...state,
-        selectedBlock: undefined,
+        gameOver: false,
         puzzleGrid,
+        selectedBlock: undefined,
         solvedGrid,
         workingGrid,
       }
@@ -41,8 +44,11 @@ function reducer(state = initialState, action: AnyAction): Reducer {
       state.workingGrid[action.coords[0]][action.coords[1]] = action.value
 
       let notifications = state.notifications || []
+      let gameOver = state.gameOver
 
       if (compareArrays(state.workingGrid, state.solvedGrid)) {
+        gameOver = true
+
         notifications = [
           ...notifications,
           {
@@ -64,8 +70,9 @@ function reducer(state = initialState, action: AnyAction): Reducer {
 
       return {
         ...state,
-        workingGrid: [...state.workingGrid],
+        gameOver: gameOver,
         notifications: [...notifications],
+        workingGrid: [...state.workingGrid],
       }
 
     case types.SELECT_BLOCK:

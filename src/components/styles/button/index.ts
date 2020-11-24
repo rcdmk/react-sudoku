@@ -20,6 +20,11 @@ export const Button = styled.button`
     padding: 0;
     transition: ${theme.transition};
 
+    &:disabled {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.black};
+    }
+
     &:focus {
       background-color: ${theme.colors.blue};
       outline: none;
