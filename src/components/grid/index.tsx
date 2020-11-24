@@ -17,21 +17,18 @@ interface State {
 }
 
 const Grid: FC = () => {
-  const state = useSelector<Reducer, State>(
-    ({ puzzleGrid, selectedBlock, solvedGrid, workingGrid }) => ({
-      puzzleGrid,
-      selectedBlock,
-      selectedValue:
-        workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
-      solvedGrid,
-    })
-  )
+  const state = useSelector<Reducer, State>(({ puzzleGrid, selectedBlock, solvedGrid, workingGrid }) => ({
+    puzzleGrid,
+    selectedBlock,
+    selectedValue: workingGrid && selectedBlock ? workingGrid[selectedBlock[0]][selectedBlock[1]] : 0,
+    solvedGrid,
+  }))
 
   const dispatch = useDispatch<Dispatch<AnyAction>>()
   const create = useCallback(() => dispatch(createGrid()), [dispatch])
 
   const fill = useCallback(
-    (n: NUMBERS) => {
+    (n: N) => {
       if (
         state.selectedBlock &&
         state.puzzleGrid &&
@@ -40,7 +37,7 @@ const Grid: FC = () => {
         dispatch(fillBlock(state.selectedBlock, n))
       }
     },
-    [dispatch, state.selectedBlock, state.selectedValue]
+    [dispatch, state.selectedBlock, state.puzzleGrid]
   )
 
   const moveDown = () => {
@@ -67,6 +64,11 @@ const Grid: FC = () => {
     }
   }
 
+  useMousetrap('backspace', () => fill(0))
+  useMousetrap('del', () => fill(0))
+  useMousetrap('space', () => fill(0))
+
+  useMousetrap('0', () => fill(0))
   useMousetrap('1', () => fill(1))
   useMousetrap('2', () => fill(2))
   useMousetrap('3', () => fill(3))
@@ -92,9 +94,7 @@ const Grid: FC = () => {
         [...Array(9)].map((_, rowIndex) => (
           <Row data-cy="grid-row-container">
             {Children.toArray(
-              [...Array(9)].map((_, colIndex) => (
-                <Block colIndex={colIndex as INDEX} rowIndex={rowIndex as INDEX} />
-              ))
+              [...Array(9)].map((_, colIndex) => <Block colIndex={colIndex as INDEX} rowIndex={rowIndex as INDEX} />)
             )}
           </Row>
         ))
