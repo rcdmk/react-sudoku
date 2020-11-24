@@ -2,12 +2,12 @@ import React, { Dispatch, FC, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button } from 'components'
-import { BLOCK_COORDS, N, NUMBERS } from 'typings'
+import { BLOCK_COORDS, N } from 'typings'
 import { fillBlock, Reducer } from 'reducers'
 import { AnyAction } from 'redux'
 
 interface Props {
-  value: NUMBERS
+  value: N
 }
 
 interface State {
@@ -29,7 +29,7 @@ const NumberButton: FC<Props> = ({ value }) => {
     }
   }, [dispatch, state.selectedBlock, state.selectedValue, value])
 
-  return <Button onClick={fill}>{value}</Button>
+  return <Button onClick={fill}>{value ? value : '⌫'}</Button>
 }
 
 export default NumberButton
